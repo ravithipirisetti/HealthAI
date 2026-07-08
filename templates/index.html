@@ -1,0 +1,181 @@
+```html id="m8s4pv"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthAI</title>
+
+    <style>
+        body{
+            margin:0;
+            font-family:Arial, Helvetica, sans-serif;
+            background:#eef5ff;
+        }
+
+        header{
+            background:#0d6efd;
+            color:white;
+            padding:20px;
+            text-align:center;
+        }
+
+        .container{
+            width:80%;
+            max-width:900px;
+            margin:40px auto;
+            background:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0 0 15px rgba(0,0,0,.15);
+        }
+
+        h2{
+            color:#0d6efd;
+        }
+
+        #search{
+            width:100%;
+            padding:12px;
+            margin-bottom:20px;
+            border-radius:6px;
+            border:1px solid #ccc;
+            font-size:14px;
+        }
+
+        .symptoms{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:10px;
+        }
+
+        label{
+            padding:8px;
+            border:1px solid #ddd;
+            border-radius:5px;
+            cursor:pointer;
+            display:block;
+        }
+
+        input[type=checkbox]{
+            margin-right:10px;
+        }
+
+        button{
+            margin-top:25px;
+            width:100%;
+            padding:15px;
+            background:#0d6efd;
+            color:white;
+            border:none;
+            border-radius:8px;
+            font-size:18px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#0b5ed7;
+        }
+
+        footer{
+            margin-top:25px;
+            text-align:center;
+            color:red;
+            font-size:14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>HealthAI</h1>
+    <p>AI-Based Symptom Checker</p>
+</header>
+
+<div class="container">
+    <h2>Select Your Symptoms</h2>
+
+    <input
+        type="text"
+        id="search"
+        placeholder="Search symptoms..."
+        onkeyup="filterSymptoms()"
+    >
+
+    <form method="POST">
+
+    <h2>Patient Information</h2>
+
+    <label>Name</label>
+    <input
+        type="text"
+        name="name"
+        placeholder="Enter your name"
+        required
+        style="width:100%;padding:10px;margin-bottom:15px;"
+    >
+
+    <label>Age</label>
+    <input
+        type="number"
+        name="age"
+        min="1"
+        max="120"
+        placeholder="Enter your age"
+        required
+        style="width:100%;padding:10px;margin-bottom:15px;"
+    >
+
+    <label>Gender</label>
+    <select
+        name="gender"
+        required
+        style="width:100%;padding:10px;margin-bottom:25px;"
+    >
+        <option value="">Select Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+    </select>
+
+    <h2>Select Your Symptoms</h2> 
+
+        <div class="symptoms" id="symptomList">
+            {% for symptom in symptoms %}
+            <label>
+                <input type="checkbox" name="symptoms" value="{{ symptom }}">
+                {{ symptom }}
+            </label>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Analyze Symptoms</button>
+    </form>
+
+    <footer>
+        ⚠ Educational use only. Not a medical diagnosis tool.
+    </footer>
+</div>
+
+<script>
+function filterSymptoms() {
+    let input = document.getElementById("search").value.toLowerCase();
+    let labels = document.querySelectorAll("#symptomList label");
+
+    labels.forEach(label => {
+        let text = label.textContent.toLowerCase();
+        if (text.includes(input)) {
+            label.style.display = "block";
+        } else {
+            label.style.display = "none";
+        }
+    });
+
+    
+}
+</script>
+
+</body>
+</html>
+```

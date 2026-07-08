@@ -1,0 +1,107 @@
+```html id="m3y9qa"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Red Flags</title>
+
+<style>
+body{
+    font-family:Arial, sans-serif;
+    margin:0;
+    background:#eef5ff;
+}
+
+header{
+    background:#0d6efd;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:85%;
+    max-width:900px;
+    margin:30px auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.15);
+}
+
+h2{
+    color:#0d6efd;
+}
+
+ul{
+    line-height:1.8;
+}
+
+.warning{
+    background:#ffe5e5;
+    padding:15px;
+    border-left:5px solid red;
+    margin-top:20px;
+}
+
+.button{
+    display:inline-block;
+    margin-top:20px;
+    padding:10px 15px;
+    background:#0d6efd;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+}
+
+.button:hover{
+    background:#0b5ed7;
+}
+
+footer{
+    margin-top:30px;
+    color:red;
+    text-align:center;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Emergency Warning Signs (Red Flags)</h1>
+</header>
+
+<div class="container">
+
+<h2>{{ disease.name }}</h2>
+
+<p>
+If any of these symptoms appear, seek immediate medical attention.
+</p>
+
+<ul>
+{% for r in disease.redflags %}
+<li>{{ r }}</li>
+{% endfor %}
+</ul>
+
+<div class="warning">
+<strong>Important:</strong>
+Do NOT ignore severe symptoms. Go to a hospital or call emergency services.
+</div>
+
+<a class="button" href="/">← Back to Home</a>
+
+<footer>
+⚠ This is an educational tool only and not a medical diagnosis system.
+Always consult a qualified healthcare professional.
+</footer>
+
+</div>
+
+</body>
+</html>
+```

@@ -1,0 +1,112 @@
+```html id="s2f8vr"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disease Information</title>
+
+<style>
+body{
+    font-family:Arial, sans-serif;
+    margin:0;
+    background:#eef5ff;
+}
+
+header{
+    background:#0d6efd;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:85%;
+    max-width:900px;
+    margin:30px auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.15);
+}
+
+h2{
+    color:#0d6efd;
+}
+
+.section{
+    margin-bottom:20px;
+}
+
+ul{
+    line-height:1.6;
+}
+
+.button{
+    display:inline-block;
+    margin-top:20px;
+    padding:10px 15px;
+    background:#0d6efd;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+}
+
+.button:hover{
+    background:#0b5ed7;
+}
+
+footer{
+    margin-top:30px;
+    color:red;
+    text-align:center;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Disease Details</h1>
+</header>
+
+<div class="container">
+
+<h2>{{ disease.name }}</h2>
+
+<div class="section">
+<h3>Description</h3>
+<p>{{ disease.description }}</p>
+</div>
+
+<div class="section">
+<h3>Symptoms</h3>
+<ul>
+{% for s in disease.symptoms %}
+<li>{{ s }}</li>
+{% endfor %}
+</ul>
+</div>
+
+<div class="section">
+<h3>Causes</h3>
+<ul>
+{% for c in disease.causes %}
+<li>{{ c }}</li>
+{% endfor %}
+</ul>
+</div>
+
+<a class="button" href="/">← Back to Home</a>
+
+<footer>
+⚠ This is an educational tool only. It is not 100% accurate.
+Please consult a qualified medical professional for real diagnosis.
+</footer>
+
+</div>
+
+</body>
+</html>
+```
