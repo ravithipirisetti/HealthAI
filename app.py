@@ -4,7 +4,11 @@ from firebase_admin import credentials, db
 
 app = Flask(__name__)
 
-cred = credentials.Certificate("healthai-51bd6-firebase-adminsdk-fbsvc-735ef6ec25.json")
+import os
+import json
+
+cred_dict = json.loads(os.environ["FIREBASE_CREDENTIALS"])
+cred = credentials.Certificate(cred_dict) 
 
 firebase_admin.initialize_app(cred, {
     "databaseURL": "https://healthai-51bd6-default-rtdb.asia-southeast1.firebasedatabase.app/"
