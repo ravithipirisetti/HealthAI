@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><title>HealthAI - Prediction Results</title>
+<title>HealthAI - Prediction Results</title>
 <meta name="description" content="View predicted diseases based on selected symptoms using HealthAI.">
 
 <style>
@@ -65,16 +65,38 @@ footer{
 
 <body>
 
+{% if emergency %}
+<div style="
+background:#ffdddd;
+border:3px solid red;
+padding:20px;
+border-radius:10px;
+margin-bottom:20px;
+text-align:center;
+font-size:22px;
+font-weight:bold;
+color:#b30000;
+">
+🚨 EMERGENCY WARNING 🚨<br><br>
+
+The symptoms you selected may indicate a serious medical condition.<br><br>
+
+Please seek immediate medical attention or contact your nearest hospital.
+</div>
+{% endif %}
+
 <header>
 <h1>Possible Conditions</h1>
 <p>Educational Health Assessment</p>
-</header>
+</header> 
 
 <div class="container">
 
 {% if results %}
 
-{% for result in results %}
+<h2>🥇 Top 3 Most Likely Conditions</h2>
+
+{% for result in results[:3] %}
 <div class="card">
 
 <h2>{{ result.name }}</h2>
@@ -95,6 +117,39 @@ Learn More
 </div>
 {% endfor %}
 
+<button
+type="button"
+class="button"
+onclick="toggleResults()"
+id="showBtn">
+▼ Show More Predictions
+</button>
+
+<div id="moreResults" style="display:none;">
+
+{% for result in results[3:] %}
+<div class="card">
+
+<h2>{{ result.name }}</h2>
+
+<p class="score">
+Symptom Match Score: {{ result.score }}%
+</p>
+
+<p>
+This condition shares several of the symptoms you selected.
+This does NOT confirm a diagnosis.
+</p>
+
+<a class="button" href="/disease/{{ result.name }}">
+Learn More
+</a>
+
+</div>
+{% endfor %}
+
+</div>
+
 {% else %}
 
 <div class="card">
@@ -105,6 +160,9 @@ The selected symptoms do not closely match the conditions currently stored in th
 </div>
 
 {% endif %}
+<a class="button" href="/download-report">
+    📄 Download Health Report
+</a> 
 
 <a class="button" href="/">← Check Again</a>
 
@@ -116,6 +174,26 @@ Always consult a qualified healthcare professional for medical advice.
 </footer>
 
 </div>
+<script>
+function toggleResults() {
+
+    let more = document.getElementById("moreResults");
+    let btn = document.getElementById("showBtn");
+
+    if (more.style.display === "none") {
+
+        more.style.display = "block";
+        btn.innerHTML = "▲ Hide Predictions";
+
+    } else {
+
+        more.style.display = "none";
+        btn.innerHTML = "▼ Show More Predictions";
+
+    }
+
+}
+</script>
 
 </body>
 </html>
