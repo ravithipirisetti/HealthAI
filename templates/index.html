@@ -85,10 +85,68 @@
             color:red;
             font-size:14px;
         }
-    </style>
+    
+    .theme-btn{
+position:fixed;
+top:20px;
+right:20px;
+padding:10px 18px;
+border:none;
+border-radius:8px;
+background:#222;
+color:white;
+cursor:pointer;
+font-weight:bold;
+z-index:999;
+}
+
+.dark-mode{
+background:#121212;
+color:white;
+}
+
+.dark-mode header{
+background:#1b1b1b;
+}
+
+.dark-mode .container{
+background:#222;
+color:white;
+}
+
+.dark-mode h2,
+.dark-mode h3{
+color:#4da3ff;
+}
+
+.dark-mode label{
+background:#2c2c2c;
+border:1px solid #555;
+color:white;
+}
+
+.dark-mode input[type="text"],
+.dark-mode input[type="number"],
+.dark-mode select,
+.dark-mode #search{
+background:#333;
+color:white;
+border:1px solid #555;
+}
+
+.dark-mode footer{
+color:#ff8080;
+}
+
+
+    </style>  
+    
 </head>
 
 <body>
+    <button id="themeToggle" class="theme-btn">
+🌙 Dark Mode
+</button> 
 
 <header>
     <h1>HealthAI</h1>
@@ -202,6 +260,29 @@ function filterSymptoms() {
 
     
 }
+</script>
+<script>
+const btn = document.getElementById("themeToggle");
+
+// Load saved theme
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark-mode");
+    btn.innerHTML = "☀️ Light Mode";
+}
+
+btn.addEventListener("click", function(){
+
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+        btn.innerHTML = "☀️ Light Mode";
+        localStorage.setItem("theme","dark");
+    }else{
+        btn.innerHTML = "🌙 Dark Mode";
+        localStorage.setItem("theme","light");
+    }
+
+});
 </script>
 
 </body>
