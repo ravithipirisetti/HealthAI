@@ -133,8 +133,109 @@ id="showBtn">
 <h2>{{ result.name }}</h2>
 
 <p class="score">
-Symptom Match Score: {{ result.score }}%
+Risk Level
 </p>
+
+{% if result.score >= 70 %}
+
+<span style="
+background:#dc3545;
+color:white;
+padding:8px 18px;
+border-radius:25px;
+font-weight:bold;
+font-size:18px;
+display:inline-block;
+margin-top:8px;">
+🔴 HIGH
+</span>
+
+<p style="
+color:#dc3545;
+font-weight:bold;
+margin-top:10px;">
+High symptom similarity detected.<br>
+Medical consultation is recommended.
+</p>
+
+{% elif result.score >= 40 %}
+
+<span style="
+background:#ffc107;
+color:black;
+padding:8px 18px;
+border-radius:25px;
+font-weight:bold;
+font-size:18px;
+display:inline-block;
+margin-top:8px;">
+🟡 MEDIUM
+</span>
+
+<p style="
+color:#c28b00;
+font-weight:bold;
+margin-top:10px;">
+Moderate symptom similarity detected.<br>
+Monitor your symptoms carefully.
+</p>
+
+{% else %}
+
+<span style="
+background:#198754;
+color:white;
+padding:8px 18px;
+border-radius:25px;
+font-weight:bold;
+font-size:18px;
+display:inline-block;
+margin-top:8px;">
+🟢 LOW
+</span>
+
+<p style="
+color:#198754;
+font-weight:bold;
+margin-top:10px;">
+Low symptom similarity detected.<br>
+Rest and continue monitoring your health.
+</p>
+
+{% endif %}
+
+<hr>
+
+<h3>💡 Health Tips</h3>
+
+{% if result.score >= 70 %}
+
+<ul>
+<li>🏥 Seek immediate medical attention.</li>
+<li>💊 Do not self-medicate without professional advice.</li>
+<li>💧 Stay hydrated while waiting for medical care.</li>
+<li>📞 Visit the nearest hospital or healthcare center.</li>
+</ul>
+
+{% elif result.score >= 40 %}
+
+<ul>
+<li>💧 Drink plenty of water.</li>
+<li>😴 Get adequate rest.</li>
+<li>🍎 Eat nutritious food.</li>
+<li>👨‍⚕️ Consult a doctor if symptoms worsen.</li>
+</ul>
+
+{% else %}
+
+<ul>
+<li>💧 Stay hydrated.</li>
+<li>😴 Take sufficient rest.</li>
+<li>🥗 Maintain a healthy diet.</li>
+<li>👀 Continue monitoring your symptoms.</li>
+</ul>
+
+{% endif %} 
 
 <p>
 This condition shares several of the symptoms you selected.
